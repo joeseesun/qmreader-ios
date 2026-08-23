@@ -1,0 +1,29 @@
+name: iOS Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify reader logic
+        run: ./run-reader-logic-tests.sh
+
+      - name: Build for iOS Simulator
+        run: >-
+          xcodebuild
+          -project QMReader.xcodeproj
+          -scheme QMReader
+          -configuration Debug
+          -destination 'generic/platform=iOS Simulator'
+          CODE_SIGNING_ALLOWED=NO
+          build
