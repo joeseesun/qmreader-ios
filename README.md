@@ -12,7 +12,13 @@
 [![SwiftUI](https://img.shields.io/badge/UI-SwiftUI-F05138)](https://developer.apple.com/xcode/swiftui/)
 [![MIT License](https://img.shields.io/badge/code-MIT-green.svg)](LICENSE)
 
-**已验证：** `ReaderLogicTests: PASS`；Xcode 26.2 无签名构建与 Apple Development 真机签名构建通过；0.5.0 已安装至 iPhone 15 Pro。
+**已验证：** `ReaderLogicTests: PASS`；Xcode 26.2 模拟器构建、Apple Development 真机安装与 `1.0.0 (11)` App Store Distribution Archive/IPA 导出通过。App Store 提交正在进行中。
+
+| 改写优先首页 | 中文沉浸阅读 |
+| --- | --- |
+| <img src="docs/assets/app-store/01-home.jpg" width="300" alt="QMReader 改写优先首页"> | <img src="docs/assets/app-store/02-reader.jpg" width="300" alt="QMReader 中文沉浸阅读"> |
+| 阅读外观 | 频道历史 |
+| <img src="docs/assets/app-store/03-appearance.jpg" width="300" alt="QMReader 阅读外观设置"> | <img src="docs/assets/app-store/04-channel-history.jpg" width="300" alt="QMReader 频道历史"> |
 
 ## 这是什么
 
@@ -47,7 +53,7 @@ open QMReader.xcodeproj
 
 1. 打开 `QMReader` Target → **Signing & Capabilities**。
 2. 选择你自己的 Apple Development Team。
-3. 如果 `ai.qiaomu.qmreader` 已被占用，把 Bundle Identifier 改为你自己的反向域名。
+3. 官方商店版使用 `ai.qiaomu.qmreader.ios`。从源码运行时请把 Bundle Identifier 改为你自己的反向域名。
 4. 选择 iOS 17+ 模拟器或已开启 Developer Mode 的 iPhone，点击 Run。
 
 ### 命令行验证
@@ -98,11 +104,17 @@ App 内置五款 SIL OFL 1.1 字体。为控制真机开发安装体积，霞鹜
 
 ## 已知限制
 
-- 这是源码发布，不提供 App Store 或公开签名 IPA；真机运行需要你自己的 Apple Development Team。
+- App Store 版正在提交审核；仓库不分发公开签名 IPA，源码真机运行仍需要你自己的 Apple Development Team 与 Bundle Identifier。
 - 当前版本以 Xcode 26.2、iOS 17 最低部署目标完成验证。
 - 系统翻译桥接只在 iOS 18+ 可用；其他系统仍可阅读原文和服务端改写。
 - 后端地址目前通过代码配置，还没有 App 内自定义服务器界面。
 - 五款中文字体会增加约 45 MB 的未压缩 App 体积。
+
+## 隐私与支持
+
+- [隐私政策](https://rss.qiaomu.ai/privacy)
+- [使用支持与内容举报](https://rss.qiaomu.ai/support)
+- [仓库内隐私摘要](PRIVACY.md)
 
 ## 贡献与安全
 
@@ -157,7 +169,9 @@ xcodebuild -project QMReader.xcodeproj -scheme QMReader \
 
 The app fetches feed, article, translation, and rewrite data from `https://rss.qiaomu.ai`. Submitting a link sends that URL to the QMReader backend. Reading preferences, read/favorite state, and cached snapshots stay on the device.
 
-This repository ships source code only—there is no public signed IPA or App Store build. System Translation requires iOS 18+. To use a compatible self-hosted backend, update the base URLs in `APIClient.swift` and `ArticleShare.swift`.
+The App Store build is currently being submitted. This repository does not distribute a publicly signed IPA. Source builds require your own Apple Development Team and Bundle Identifier. System Translation requires iOS 18+. To use a compatible self-hosted backend, update the base URLs in `APIClient.swift` and `ArticleShare.swift`.
+
+Privacy policy: https://rss.qiaomu.ai/privacy · Support: https://rss.qiaomu.ai/support
 
 The app code is MIT licensed. Bundled fonts retain their upstream SIL OFL 1.1 licenses; see [font provenance](QMReader/Fonts/Licenses/README.md).
 
